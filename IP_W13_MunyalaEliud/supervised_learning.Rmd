@@ -1,0 +1,35 @@
+---
+title: "EDA,Supervised and Unsupervised Learning in R"
+author: "Munyala Eliud"
+date: "Nov 26, 2021"
+output: html_document
+---
+
+# Problem Statement
+>Kira Plastinina is a Russian brand that is sold through a defunct chain of retail stores in Russia, Ukraine, Kazakhstan, Belarus, China, Philippines, and Armenia. The brand’s Sales and Marketing team would like to understand their customer’s behavior from data that they have collected over the past year. More specifically, they would like to learn the characteristics of customer groups.
+
+
+# ------------------------------------installs and libraries--------------------------------------------------
+```{r}
+
+library(tidyverse)
+library(readr) # enable us to read csv files
+library(dplyr)
+
+#Install if the package doesn't exist 
+#install.packages('DataExplorer) 
+#library(DataExplorer)
+
+```
+
+# Load Data
+```{r}
+
+df_kira_plast <- read.csv(url('http://bit.ly/EcommerceCustomersDataset'))
+
+```
+
+```{r}
+head(df_kira_plast)
+```
+

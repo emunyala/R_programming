@@ -1,0 +1,28 @@
+---
+title: "EDA,Supervised and Unsupervised Learning in R"
+author: "Munyala Eliud"
+date: "Nov 26, 2021"
+output: html_document
+---
+
+# Problem Statement
+
+
+# ------------------------------------installs and libraries--------------------------------------------------
+```{r}
+
+library(tidyverse)
+library(readr) # enable us to read csv files
+library(dplyr)
+
+#Install if the package doesn't exist 
+#install.packages('DataExplorer) 
+library(DataExplorer)
+
+```
+
+# Load Data
+```{r}
+
+```
+
