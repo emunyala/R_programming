@@ -99,7 +99,7 @@ ggplot(df_kira_plast,aes(x=Weekend)) + geom_bar()
 
 # ---------------- Classification ------------------
 
-# classify wether a person is a new or returning visitors.
+# 
 
 ```{r}
 str(df_kira_plast)
@@ -107,9 +107,67 @@ str(df_kira_plast)
 
 
 ```{r}
-df_new_1 <- df_kira_plast[,c("Administrative","Administrative_Duration","Informational","Informational_Duration","ProductRelated","ProductRelated_Duration","BounceRates"     ,"ExitRates","PageValues","SpecialDay","OperatingSystems","Browser",          "Region","TrafficType","VisitorType")]
+df_new_1 <- df_kira_plast[,c("Administrative","Administrative_Duration","Informational","Informational_Duration","ProductRelated","ProductRelated_Duration","BounceRates"     ,"ExitRates","PageValues","SpecialDay","OperatingSystems","Browser","Region","TrafficType","VisitorType")]
 
 ```
+
+
+```{r}
+str(df_new_1)
+```
+
+```{r}
+
+
+# Normalizing the dataset so that no particular attribute 
+# has more impact on clustering algorithm than others.
+# ---
+# 
+normalize <- function(x){
+  return ((x-min(x)) / (max(x)-min(x)))
+}
+
+for (i in colnames(df_new_1[,1:14])){
+  normalize(df_new_1[[i]])
+}
+```
+
+
+```{r}
+
+```
+
+
+```{r}
+result <- kmeans(df_new_1,3)
+```
+
+```{r}
+result$centers
+```
+
+```{r}
+result$cluster
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
+
+
+
+
+
 
 ```{r}
 head(df_new_1)
@@ -133,15 +191,35 @@ df_new_1 <- na.omit(df_new_1)
 df_new_1
 ```
 
-# data separation
+# feature engineering
+
+```{r}
+result <- kmeans(df_new_1,3)
+```
+
+
 
 ```{r}
 
-intrain <- createDataPartition(y = df_new_1$VisitorType, p= 0.7, list = FALSE)
-training <- df_new_1[intrain,]
-testing <- df_new_1[-intrain,]
+# Normalizing the dataset so that no particular attribute 
+# has more impact on clustering algorithm than others.
+# ---
+# 
+normalize <- function(x){
+  return ((x-min(x)) / (max(x)-min(x)))
+}
+
+
 
 ```
+
+```{r}
+
+for (i in colnames(df_new_1)){
+  df_new_1[[i]] <- normalize(df_new_1[[i]])
+}
+```
+
 
 
 ```{r}

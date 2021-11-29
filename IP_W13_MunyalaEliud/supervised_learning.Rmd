@@ -113,7 +113,7 @@ str(df_kira_plast)
 
 
 ```{r}
-df_new_1 <- df_kira_plast[,c("Administrative","Administrative_Duration","Informational","Informational_Duration","ProductRelated","ProductRelated_Duration","BounceRates"     ,"ExitRates","PageValues","SpecialDay","OperatingSystems","Browser",          "Region","TrafficType","VisitorType")]
+df_new_1 <- df_kira_plast[,c("Administrative","Administrative_Duration","Informational","Informational_Duration","ProductRelated","ProductRelated_Duration","BounceRates"     ,"ExitRates","PageValues","SpecialDay","OperatingSystems","Browser","Region","TrafficType","VisitorType")]
 
 ```
 
