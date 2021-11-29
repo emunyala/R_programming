@@ -92,8 +92,14 @@ ggplot(df_kira_plast,aes(x=Revenue)) + geom_bar()
 
 ```{r}
 # frequency distribution table
-ggplot(df_kira_plast,aes(x=Weekend)) + geom_bar()
+ggplot(df_kira_plast,aes(x=Weekend),col="blue") + geom_bar()
+
 ```
+
+```{r}
+plot(df_kira_plast$BounceRates,df_kira_plast$ExitRates,xlab = "Bounce Rates",ylab = "Exit Rates",col='green')
+```
+
 
 # Supervised Learning - Regression, KNN, Decision Trees, SVM and Naive Bayes
 
@@ -182,7 +188,7 @@ svm_Linear
 ```{r}
 # 
 test_pred <- predict(svm_Linear, newdata = testing)
-test_pred
+test_pred[1:100]
 ```
 
 ```{r}
