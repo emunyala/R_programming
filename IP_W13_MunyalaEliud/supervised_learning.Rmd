@@ -9,13 +9,16 @@ output: html_document
 >Kira Plastinina is a Russian brand that is sold through a defunct chain of retail stores in Russia, Ukraine, Kazakhstan, Belarus, China, Philippines, and Armenia. The brand’s Sales and Marketing team would like to understand their customer’s behavior from data that they have collected over the past year. More specifically, they would like to learn the characteristics of customer groups.
 
 
-# ------------------------------------installs and libraries--------------------------------------------------
+# ----------------installs and libraries--------------------------
 ```{r}
 
 library(tidyverse)
 library(readr) # enable us to read csv files
 library(dplyr)
-
+#install.packages('caTools')
+library(caTools)
+library(caret)
+#install.packages('caret')
 #Install if the package doesn't exist 
 #install.packages('DataExplorer) 
 #library(DataExplorer)
@@ -29,7 +32,179 @@ df_kira_plast <- read.csv(url('http://bit.ly/EcommerceCustomersDataset'))
 
 ```
 
+
 ```{r}
 head(df_kira_plast)
 ```
+
+```{r}
+view(df_kira_plast)
+```
+
+```{r}
+tail(df_kira_plast)
+```
+
+```{r}
+#check columns
+names(df_kira_plast)
+
+```
+
+```{r}
+is.null(df_kira_plast)
+```
+
+
+# ------ EXPLORATORY DATA ANALYSIS -----------------
+
+> The students find and deal with outliers, anomalies, and missing data within the dataset. 
+
+```{r}
+summary(df_kira_plast)
+```
+
+```{r}
+# check data types
+str(df_kira_plast)
+```
+
+
+# ----------- Univariate,Bivariate,Multivariate -------------
+
+```{r}
+# frequency distribution table
+ggplot(df_kira_plast,aes(x=Month)) + geom_bar()
+
+```
+
+```{r}
+
+# frequency distribution table
+ggplot(df_kira_plast,aes(x=VisitorType)) + geom_bar()
+
+```
+
+```{r}
+# frequency distribution table
+ggplot(df_kira_plast,aes(x=Revenue)) + geom_bar()
+```
+
+```{r}
+# frequency distribution table
+ggplot(df_kira_plast,aes(x=Weekend)) + geom_bar()
+```
+
+# Supervised Learning - Regression, KNN, Decision Trees, SVM and Naive Bayes
+
+# ---------------- Classification ------------------
+
+# classify wether a person is a new or returning visitors.
+
+```{r}
+str(df_kira_plast)
+```
+
+
+```{r}
+df_new_1 <- df_kira_plast[,c("Administrative","Administrative_Duration","Informational","Informational_Duration","ProductRelated","ProductRelated_Duration","BounceRates"     ,"ExitRates","PageValues","SpecialDay","OperatingSystems","Browser",          "Region","TrafficType","VisitorType")]
+
+```
+
+```{r}
+head(df_new_1)
+```
+
+```{r}
+
+str(df_new_1)
+```
+
+```{r}
+sum(is.na(df_new_1))
+```
+
+```{r}
+#remove NA values from vector
+df_new_1 <- na.omit(df_new_1)
+```
+
+```{r}
+df_new_1
+```
+
+# data separation
+
+```{r}
+
+intrain <- createDataPartition(y = df_new_1$VisitorType, p= 0.7, list = FALSE)
+training <- df_new_1[intrain,]
+testing <- df_new_1[-intrain,]
+
+```
+
+
+```{r}
+# We check the dimensions of out training dataframe and testing dataframe
+# ---
+# 
+dim(training); 
+dim(testing);
+```
+
+
+
+```{r}
+
+```
+
+
+
+# ------------- Supervised learning with SVM ------------------
+```{r}
+trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
+```
+
+
+```{r}
+svm_Linear <- train(VisitorType ~., data = training, method = "svmLinear",
+trControl=trctrl,
+preProcess = c("center", "scale"),
+tuneLength = 10)
+```
+
+```{r}
+# ---
+# 
+svm_Linear
+```
+
+```{r}
+# 
+test_pred <- predict(svm_Linear, newdata = testing)
+test_pred
+```
+
+```{r}
+# Now checking for our accuracy of our model by using a confusion matrix 
+# ---
+# 
+confusionMatrix(table(test_pred, testing$VisitorType))
+```
+
+
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+```{r}
+
+```
+
+
 
