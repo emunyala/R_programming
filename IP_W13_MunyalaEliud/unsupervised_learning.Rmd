@@ -249,7 +249,7 @@ kmeans.re$centers[, c("Administrative","Administrative_Duration")]
 ```{r}
 # Visualizing clusters
 y_kmeans <- kmeans.re$cluster
-clusplot(iris_1[, c("Administrative","Administrative_Duration")],
+clusplot(training[, c("Administrative","Administrative_Duration")],
                       y_kmeans,
                       lines = 0,
                       shade = TRUE,
