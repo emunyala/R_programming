@@ -56,6 +56,19 @@ is.null(df_kira_plast)
 ```
 
 
+# ------ EXPLORATORY DATA ANALYSIS -----------------
+
+> The students find and deal with outliers, anomalies, and missing data within the dataset. 
+
+```{r}
+summary(df_kira_plast)
+```
+
+```{r}
+# check data types
+str(df_kira_plast)
+```
+
 
 # ----------- Univariate,Bivariate,Multivariate -------------
 
@@ -88,6 +101,11 @@ plot(df_kira_plast$BounceRates,df_kira_plast$ExitRates,xlab = "Bounce Rates",yla
 ```
 
 
+# Supervised Learning - Regression, KNN, Decision Trees, SVM and Naive Bayes
+
+# ---------------- Classification ------------------
+
+# classify wether a person is a new or returning visitors.
 
 ```{r}
 str(df_kira_plast)

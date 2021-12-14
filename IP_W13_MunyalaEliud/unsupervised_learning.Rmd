@@ -213,36 +213,50 @@ dim(testing);
 
 
 
-# ------------- Supervised learning with SVM ------------------
+# ------------- Unsupervised learning------------------
 ```{r}
 trctrl <- trainControl(method = "repeatedcv", number = 10, repeats = 3)
 ```
 
 
 ```{r}
-svm_Linear <- train(VisitorType ~., data = training, method = "svmLinear",
-trControl=trctrl,
-preProcess = c("center", "scale"),
-tuneLength = 10)
+# Fitting K-Means clustering Model
+# to training dataset
+set.seed(240) # Setting seed
+kmeans.re <- kmeans(VisitorType, centers = 3,
+                            nstart = 20)
+kmeans.re
 ```
 
 ```{r}
 # ---
-# 
-svm_Linear
+# Cluster identification for
+# each observation
+kmeans.re$cluster
+ 
+# Confusion Matrix
+cm <- table(training, kmeans.re$cluster)
+cm
 ```
 
 ```{r}
 # 
-test_pred <- predict(svm_Linear, newdata = testing)
-test_pred
+# Plotiing cluster centers
+kmeans.re$centers
+kmeans.re$centers[, c("Administrative","Administrative_Duration")]
 ```
 
 ```{r}
-# Now checking for our accuracy of our model by using a confusion matrix 
-# ---
-# 
-confusionMatrix(table(test_pred, testing$VisitorType))
+# Visualizing clusters
+y_kmeans <- kmeans.re$cluster
+clusplot(iris_1[, c("Administrative","Administrative_Duration")],
+                      y_kmeans,
+                      lines = 0,
+                      shade = TRUE,
+                      color = TRUE,
+                      labels = 2,
+                      plotchar = FALSE,
+                      span = TRUE,)
 ```
 
 
