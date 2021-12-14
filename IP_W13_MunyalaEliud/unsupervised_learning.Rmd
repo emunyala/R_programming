@@ -1,5 +1,5 @@
 ---
-title: "Supervised Learning in R"
+title: "Unsupervised Learning in R"
 author: "Munyala Eliud"
 date: "Nov 26, 2021"
 output: html_document
